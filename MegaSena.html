@@ -1,0 +1,93 @@
+<meta charset="UTF-8">
+<h2> Jogo Mega Sena</h2>
+<br/>
+<br/>
+<h3> Informe seus 6 números para o sorteio<h3/>
+<input type="text" id="numero" />
+<input type="submit" id="sorteio" value = "Adicionar números">
+<br><br>
+<input type="submit" id="analise" value = "Conferir números">
+
+<script>
+var pulaLinha = function(){
+	document.write("<br/>");
+};
+var mostra = function(frase){
+	document.write(frase);
+	pulaLinha();
+};
+
+var sorteados = [];
+var numJogo = [];
+
+for(var i = 1; i <= 6; i++){
+	
+	var numSorteados = Math.round(Math.random() * 60);
+	sorteados[i] == numSorteados;
+	sorteados.push(numSorteados);
+	console.log(sorteados);
+}
+
+var adicionarSorteado = function(){
+	var numero = document.getElementById("numero").value;
+	for(var i=0; i<=6; i++){
+		if(numJogo[i] == numero){
+			alert("Numero já escolhido!");
+			return;
+		}
+	}
+	numJogo.push(numero);
+	console.log(numJogo);
+};
+
+var caixaDeTexto = document.getElementById("conferir");
+var contNumAcertado = 0;
+var botaoClicado = function(){
+	for(var i=0; i<sorteados.length; i++){
+		for(var j=0; j<sorteados.length; j++){
+		
+			if(sorteados[i] == numJogo[j]){
+				contNumAcertado ++;
+			}
+		}
+	}
+	if (contNumAcertado == 0){
+		alert("Infelizmente você não acertou nenhum!");
+		for(i=0; i<6; i++){
+		mostra("Numeros escolhidos: " + numJogo[i]);
+		}
+		pulaLinha();
+		for(i=0; i<6; i++){
+		mostra("Numeros sorteados: " + sorteados[i])
+		}
+	}
+	if (contNumAcertado > 0 && contNumAcertado < 6 ){
+		alert("Parabens você acertou " + contNumAcertado + " números!");
+		for(i=0; i<6; i++){
+		mostra("Numeros escolhidos: " + sorteados[i]);
+		}
+		pulaLinha();
+		for(i=0; i<6; i++){
+		mostra("Numeros sorteaddos: " + numJogo[i])
+		}
+	}
+	if (contNumAcertado == 6){
+		alert("Parabéns você acertou todos!")
+		for(i=0; i<6; i++){
+		mostra("Numeros escolhidos: " + sorteados[i]);
+		}
+		pulaLinha();
+		for(i=0; i<6; i++){
+		mostra("Numeros sorteaddos: " + numJogo[i])
+		}
+	}
+};
+	
+	var botao = document.getElementById("sorteio");
+	botao.onclick = adicionarSorteado;
+	
+	var botaoAdivinhar = document.getElementById("analise");
+	botaoAdivinhar.onclick = botaoClicado;
+	
+</script>
+</meta>
